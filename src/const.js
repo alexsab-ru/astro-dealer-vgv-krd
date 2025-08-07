@@ -26,19 +26,33 @@ export const LINKS_MENU = [
 		name: 'Модели',
 		children
 	},
+	{ 
+		url: 'javascript:void(0)', 
+		name: 'Покупателям',
+		children: [
+			{url: '/test-drive/', name: 'Запись на тест-драйв'},
+		]
+	},
+	{ 
+		url: 'javascript:void(0)', 
+		name: 'Владельцам',
+		children: [
+			{url: '/service-request/', name: 'Запись на сервис'},
+		]
+	},
 	// {url: 'trade-in/', name: 'Оценка автомобиля'},
-	{url: '/special-offers/', name: 'Спецпредложения'},
-	{url: '/news/', name: 'Новости'},
-	{url: '/test-drive/', name: 'Запись на тест-драйв'},
-	{url: '/service-request/', name: 'Запись на сервис'},
+	// {url: '/special-offers/', name: 'Спецпредложения'},
+	// {url: '/news/', name: 'Новости'},
+	
 	{url: '/#services', name: 'Услуги'},
+	{url: '/about/', name: 'О бренде'},
 	{url: '/contacts/', name: 'Контакты'},
 ];
 
 // Коллекции
 export const COLLECTIONS = [
-	{name: 'special-offers', title: 'Спецпредложения'},
-	{name: 'news', title: 'Новости'},
+	// {name: 'special-offers', title: 'Спецпредложения'},
+	// {name: 'news', title: 'Новости'},
 ];
 
 // Текст согласия в формах
@@ -52,3 +66,4 @@ const salons = salonsData.filter(salon => !salon?.type || salon?.type.includes('
 const phones = phone_common ? [`<a class="whitespace-nowrap" href="tel:${phoneFormat(phone_common)}">${phone_common}</a>`] : salons.map((salon) => { return `<span>${salon.name}</span> <a class="whitespace-nowrap" href="tel:${phoneFormat(salon.phone)}">${salon.phone}</a>` });
 
 export const FOOTER_INFO = '<sup>*</sup> Вся представленная на сайте информация, касающаяся автомобилей и сервисного обслуживания, носит информационный характер и не является публичной офертой, определяемой положениями ст. 437 ГК РФ. Все цены, указанные на данном сайте, носят информационный характер. Для получения подробной информации просьба обращаться к менеджерам отдела продаж по номеру телефона '+phones.join(', ')+'. Опубликованная на данном сайте информация может быть изменена в любое время без предварительного уведомления.';
+export const REVIEWS_LIMIT = Infinity;
