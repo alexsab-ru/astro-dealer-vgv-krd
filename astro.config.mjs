@@ -100,6 +100,6 @@ export default defineConfig({
 			},
 		},
 	},
-  site: computedSite,
+    site: computedSite,
 	base: "/"
-})
+});
