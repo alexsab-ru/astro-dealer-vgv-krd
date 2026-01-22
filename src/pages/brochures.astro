@@ -1,0 +1,37 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import modelsData from '@/data/models.json';
+import { Icon } from 'astro-icon/components';
+
+const models = modelsData.models.filter((model) => model.show && model.status === 'enable');
+
+// Добавляем brochureUrl к каждой модели на основе её id
+const modelsWithBrochures = models.length > 0 
+    ? models.map(model => ({
+        ...model,
+        brochureUrl: `https://cdn.alexsab.ru/manuals/vgv/${model.id}.pdf`
+    }))
+    : [];
+---
+
+<PageLayout
+    h1="Брошюры и руководства"
+    title="Брошюры и руководства"
+    description="Ознакомьтесь с Брошюрами и руководствами к автомобилям VGV"
+    breadcrumb={[{name:"Брошюры и руководства",href:""}]}
+>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {modelsWithBrochures.map((model) => (
+            <div class="shadow-md rounded-lg overflow-hidden">
+                <img src={model.thumb} alt={model.name} class="w-full h-auto object-cover" />
+                <div class="p-4">
+                    <a href={model.brochureUrl} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors">
+                        <Icon name="mdi:file-pdf-box" class="w-6 h-6" />
+                        <span>Каталог VGV {model.name}</span>
+                    </a>
+                </div>
+            </div>
+        ))}
+    </div>
+
+</PageLayout>
