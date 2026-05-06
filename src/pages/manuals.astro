@@ -1,6 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
-import modelsData from '@/data/models.json';
+import modelsData from '@/data/site/models.json';
 import { Icon } from 'astro-icon/components';
 
 const models = modelsData.models.filter((model) => model.show && model.status === 'enable');
