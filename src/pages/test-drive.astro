@@ -20,28 +20,13 @@ const visibleTestDrive = Array.isArray(testDrive) ? testDrive.filter(isModelVisi
 /** Левая колонка с карточкой модели нужна только если в данных есть модели для тест-драйва. */
 const hasTestDriveModels = visibleTestDrive.length > 0;
 ---
-
 <Layout 
 	title={`Тест-драйв автомобиля ${brand} – Онлайн запись в салон официального дилера ${brand} в ${legal_city_where}`} 
 	description={`Записаться на тест-драйв автомобиля ${brand} в ${legal_city_where} вы можете на официальном сайте дилера ${brand} в ${legal_city_where}, заполнив специальную форму, или по телефонам: ${salonsPhone}`} 
 	{...salons.length > 1 && hasTestDriveModels ? { brand: getModelBrandId(visibleTestDrive[0]) } : {}}
 	breadcrumb={[{ name: 'Тест-драйв', href: '/test-drive/' }]}
 >
-	<div class="flex flex-col lg:flex-row xl:min-h-[600px]" x-data=`{
-		models: null,
-		current: null,
-		getModels: function() {
-			this.models = ${optionsJSON};
-		},
-		currentModel: function(id) {
-			this.current = this.models.find(m => m.id === id);
-			${salons.length > 1 ? "const brandValue = this.current?.mark_id; if (brandValue) { document.documentElement.setAttribute('data-brand', brandValue); $dispatch('brand-updated', { brand: brandValue }); }" : ""}
-		},
-		init: function() {
-			this.getModels();
-			this.currentModel([...this.models][0].id);
-		}
-	}`>
+	<div class="flex flex-col lg:flex-row xl:min-h-[600px]" x-data="testDrive">
 
 		{hasTestDriveModels && (
 			<div
@@ -140,3 +125,8 @@ const hasTestDriveModels = visibleTestDrive.length > 0;
 
 	</div>
 </Layout>
+
+<script>
+	import { testDriveComponent } from '@/js/alpine/testDrive.js';
+	document.addEventListener('alpine:init', testDriveComponent);
+</script>
